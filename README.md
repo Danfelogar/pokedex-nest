@@ -36,8 +36,22 @@ http://localhost:3000/api/v2/seed
 * Mongo DB
 * Nest
 
+## Production Build
+1. Create file ```.env.prod```
+2. fill the variables of production environments
+3. create the new image
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
 ## Others things you considered for worked project
 
 * have docker
 * have img mong v5
 * have img of postgres( in the future) v14.3
+
+## Build in docker-compose
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+* https://gist.github.com/Klerith/e7861738c93712840ab3a38674843490
