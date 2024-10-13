@@ -4,6 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -15,7 +16,9 @@ import { CommonModule } from './common/common.module';
     MongooseModule.forRoot('mongodb://localhost:27017/nest-pokemon'), //esto es para conectar a la base de datos de mongoDB
 
     // reccuerda que el comando para crearlo es "nest g res pokemon --no-spec"
-    PokemonModule, CommonModule,
+    PokemonModule,
+    CommonModule,
+    SeedModule,
   ],
 })
 export class AppModule {}

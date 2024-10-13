@@ -23,3 +23,9 @@ docker-compose up -d
 ## Used Stacks
 * Mongo DB
 * Nest
+
+## Others things you considered for worked project
+
+* have docker
+* have img mong v5
+* have img of postgres( in the future) v14.3
