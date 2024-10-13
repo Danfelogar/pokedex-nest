@@ -20,6 +20,11 @@ docker-compose up -d
 
 5. remember update .gitignore for ignore mongo file
 
+6. remake the data base with seed (only executed in dev mode and only if you don't have pokemons for testing)
+```
+http://localhost:3000/api/v2/seed
+```
+
 ## Used Stacks
 * Mongo DB
 * Nest

@@ -14,6 +14,11 @@ async function bootstrap() {
       whitelist: true,
       //forbidNonWhitelisted si hay data que no se espera me tiene que retornar error para que en las peticiones no se mande basura
       forbidNonWhitelisted: true,
+      //esto es para transformar dtos en valores a usar ejemplo queryparams de strings a numbers, no es lo mejor al usar distintas instancias
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
