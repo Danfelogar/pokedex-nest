@@ -1,0 +1,17 @@
+version: '3'
+# docker-compose up -d this commant will start the container in the background
+services:
+  db:
+    # Use the official mongo image version 5
+    image: mongo:5
+    # Always restart the container if it crashes
+    restart: always
+    ports:
+    # Map port 27017 on the host to 27017 on the container
+      - 27017:27017
+    environment:
+      # Set the environment variable MONGODB_DATABASE to nest-pokemon
+      MONGODB_DATABASE: nest-pokemon
+    volumes:
+      # Mount the data volume to the host machine for persistence data base
+      - ./mongo:/data/db
