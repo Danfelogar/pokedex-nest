@@ -10,15 +10,23 @@ import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
+  private readonly defaultLimit: number;
+
   // pokemonModel es una instancia de la clase Model de mongoose que se encarga de interactuar con la base de datos
   constructor(
     // este decorador de inyección de dependencias se encarga de inyectar la dependencia de la clase Model de mongoose para poder interactuar con la base de datos
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
-  ) {}
+    //esto es para inyectar la configuración de las variables de entorno
+    private readonly configService: ConfigService,
+  ) {
+    // console.log(process.env.DEFAULT_LIMIT);
+    this.defaultLimit = configService.get<number>('default_limit');
+  }
 
   async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
@@ -33,10 +41,20 @@ export class PokemonService {
   }
 
   findAll(paginationDto: PaginationDto) {
-    const { limit = 10, offset = 0 } = paginationDto;
+    const { limit = this.defaultLimit, offset = 0 } = paginationDto;
 
-    // limit para limitar la data y skip para pasar de un numero determinado a otro
-    return this.pokemonModel.find().limit(limit).skip(offset);
+    return (
+      this.pokemonModel
+        .find()
+        //limit es para limitar la cantidad de documentos que se devuelven
+        .limit(limit)
+        //skip es para saltar una cantidad de documentos
+        .skip(offset)
+        //organiza los documentos por el campo no de forma ascendente
+        .sort({ no: 1 })
+        //esto es para que no se muestre el campo __v en la respuesta
+        .select('-__v')
+    );
   }
 
   async findOne(term: string) {

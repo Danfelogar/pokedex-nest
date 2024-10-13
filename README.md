@@ -20,7 +20,14 @@ docker-compose up -d
 
 5. remember update .gitignore for ignore mongo file
 
-6. remake the data base with seed (only executed in dev mode and only if you don't have pokemons for testing)
+6. clone .env.template file and rename this one to .env and fill the place with variables
+
+7. run the backend
+```
+pnpm run start:dev
+```
+
+8. remake the data base with seed (only executed in dev mode and only if you don't have pokemons for testing)
 ```
 http://localhost:3000/api/v2/seed
 ```

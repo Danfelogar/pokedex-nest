@@ -21,7 +21,7 @@ async function bootstrap() {
       },
     }),
   );
-
-  await app.listen(3000);
+  // se puede inyectar directamente el .env ya que no esta dentro de un modulo de node o nest por lo que es necesitarlo tenerlo bien definido en el archivo .env
+  await app.listen(process.env.PORT);
 }
 bootstrap();
